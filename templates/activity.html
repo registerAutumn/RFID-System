@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div class="detail">
+        <div class="title">{{details.title}}</div>
+        <div class="unit">{{details.unit}}</div>
+        <div class="descript">{{details.descript}}</div>
+        <table cellpadding="0" cellspacing="0">
+            <thead>
+                <th>學號</th>
+                <th>科系</th>
+                <th>姓名</th>
+                <th>簽到狀態</th>
+                <th>簽到時間</th>
+            </thead>
+            {% for member in details.attend_list %}
+            <tr>
+                <td>{{member.student_id}}</td>
+                <td>{{member.unit}}</td>
+                <td>{{member.name}}</td>
+                <td><div id="_{{member.student_id}}" class="ball" style="background: {{'#00FF00' if member.status == 1 else '#FF0000'}}"></div></td>
+                <td>{{member.time}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <script type="text/javascript" charset="utf-8">
+        console.log(document.domain);
+        console.log(location.port);
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        socket.on('check_in', function(data) {
+            if(eval(data.success)){
+                $("#_" + data.id).css("background", "#00ff00");
+            }
+            if(data.hasOwnProperty("time")){
+                $("#_" + data.id).parent().next().text(data.time);
+            }
+        });
+    </script>
+{% endblock %}

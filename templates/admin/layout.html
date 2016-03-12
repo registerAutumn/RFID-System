@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Check System Manager</title>
+</head>
+<link rel="stylesheet" type="text/css" href="/static/css/admin.css">
+<body topmargin="0" leftmargin="0">
+    <div class="menu">
+        <div class="items active"><a href="/admin/users">使用者名單</a></div>
+        <div class="items"><a href="/admin/event">活動清單</a></div>
+    </div>
+    <div class="main">
+        {% block body%}
+        {% endblock %}
+    </div>
+</body>
+</html>

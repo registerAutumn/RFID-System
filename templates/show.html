@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block body %}
+{% for activity in act %}
+    <div class="block">
+        <div class="content" onclick="location.href='/{{activity.id}}'">
+            <div class="title">{{activity.title[:7]}}</div>
+            <div class="unit">{{activity.unit}}</div>
+            <div class="descript">{{activity.descript}}</div>
+        </div>
+    </div>
+{% endfor %}
+{% endblock%}
